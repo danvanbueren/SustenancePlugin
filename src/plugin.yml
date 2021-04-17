@@ -1,0 +1,16 @@
+name: Sustenance
+main: me.danvb10.sustenance.Main
+version: 0.0.1
+author: danvb10
+description: Adds realistic hunger management to Minecraft.
+api-version: 1.13
+
+commands:
+  Sustenance:
+    usage: /<command>
+    description: Sustenance's command heirarchy.
+    permission: sustenance.all
+  Sus:
+    usage: /<command>
+    description: Sustenance's command heirarchy (shorthand).
+    permission: sustenance.all

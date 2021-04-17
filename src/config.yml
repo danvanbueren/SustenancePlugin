@@ -1,0 +1,77 @@
+# This is Sustenance's configuration file
+# There are short descriptions for each setting
+# If something needs to be clarified, let me know
+# .
+# I have created this template for you, which I believe to be balanced
+# Please change whatever you like to fit your server's needs
+# .
+# If you deleted a field and can't remember what to do:
+# Delete or move this file and let the plugin regenerate this template
+# It will only duplicate the template if the file cannot be found
+# If you delete all the contents, it will not regenerate the entire file
+# It will only regenerate the required headers, not entire data structures
+# .
+# Feel free to contact me on GitHub
+# GitHub: https://github.com/danvanbueren
+# .
+# CAUTION: THIS IS NOT AN AI. IT CAN'T READ YOUR MIND. SPELLING MATTERS!
+# REFERENCE LIST FOR FOODS: https://minecraftitemids.com/types/food
+# IGNORE LEGACY ID'S, UTILIZE STANDARD ID'S
+# USE ID ONLY, NOT NAMESPACE; I.E. `apple`, NOT `minecraft:apple`
+# .
+# -- INSTRUCTIONS
+# .
+# - GENERAL SETTINGS 'settings'
+# 'decay-multiplier' will increase the speed at which nutrition drops
+# 'verbose-logging' will send more detailed messages to the server log
+# .
+# - CATEGORY SETTINGS 'categories'
+# Set categories and nutritional values for food items
+# Categories are static (for now) - leave the datastructure as is
+# .
+# - EFFECT SETTINGS 'effects'
+# Set effects for categories
+# Set the key to category the effects will apply to
+# Set the name to the effect you want to apply
+# Set the threshold at the nutrition level you want effects to apply
+# Set the multiplier at the intensity you want the effect to apply
+# Some effects will not see any changes regardless of multiplier
+# .
+settings:
+  decay-multiplier: 5
+  verbose-logging: false
+categories:
+  grain:
+    bread: 10
+  protein:
+    bread: 10
+  fruit:
+    bread: 10
+  vegetables:
+    bread: 10
+effects:
+  grain:
+    - name: hunger
+      threshold: 20
+      multiplier: 1
+    - name: mining_fatigue
+      threshold: 20
+      multiplier: 1
+  protein:
+    - name: hunger
+      threshold: 20
+      multiplier: 1
+    - name: mining_fatigue
+      threshold: 20
+      multiplier: 1
+    - name: nausea
+      threshold: 20
+      multiplier: 1
+  fruit:
+    - name: hunger
+      threshold: 20
+      multiplier: 1
+  vegetables:
+    - name: hunger
+      threshold: 20
+      multiplier: 1

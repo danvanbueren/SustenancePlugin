@@ -1,0 +1,72 @@
+package me.danvb10.sustenance.commands;
+
+import me.danvb10.sustenance.Main;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class Sus implements CommandExecutor {
+
+    // Handle variables outside of the logic
+    private String menuPre = " \n"
+            + ChatColor.AQUA  + "=====================SUSTENANCE======================\n"
+            + ChatColor.WHITE + "Status: " + ChatColor.GRAY;
+    private String menuPost = "\n"
+            + ChatColor.WHITE + "Commands: " + ChatColor.GRAY + "/sus help\n"
+            + ChatColor.AQUA  + "=====================================================\n ";
+
+    // Handle running any command registered to the plugin
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        // Status section
+        String menuStatus;
+        if(sender instanceof Player) {
+            Player p = (Player) sender;
+            menuStatus = Main.nutritionManager.getPlayerNutrition(p).getFormattedNutrition();
+        } else { menuStatus = "Not available in console!"; }
+
+        String menu = menuPre + menuStatus + menuPost;
+
+        // Check to see if there are arguments
+        if (args.length > 0) {
+
+            // If there are arguments, send the process to the applicable class
+            switch (args[0].toLowerCase()) {
+                case "exempt":
+                    SusExempt.goCode(sender, command, label, args);
+                    break;
+                case "help": case "?":
+                    SusHelp.goCode(sender, command, label, args);
+                    break;
+                case "replenish":
+                    SusReplenish.goCode(sender, command, label, args);
+                    break;
+                case "setvalue":
+                    SusSetvalue.goCode(sender, command, label, args);
+                    break;
+                case "status":
+                    SusStatus.goCode(sender, command, label, args);
+                    break;
+                case "statuslist":
+                    SusStatuslist.goCode(sender, command, label, args);
+                    break;
+                case "config":
+                    SusConfig.goCode(sender, command, label, args);
+                    break;
+                default:
+                    // Argument exists but doesn't match cases - send menu
+                    Main.messagingManager.info("'" + args[0] + "' is not a command!", sender);
+                    sender.sendMessage(menu);
+                    break;
+            }
+        } else {
+            // There are no arguments - send menu
+            sender.sendMessage(menu);
+        }
+
+        return true;
+    }
+}
