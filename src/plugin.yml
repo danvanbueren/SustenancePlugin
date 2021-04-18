@@ -1,6 +1,6 @@
 name: Sustenance
 main: me.danvb10.sustenance.Main
-version: 0.0.1
+version: 0.1.0
 author: danvb10
 description: Adds realistic hunger management to Minecraft.
 api-version: 1.13

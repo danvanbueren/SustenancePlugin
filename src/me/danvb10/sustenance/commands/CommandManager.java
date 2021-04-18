@@ -1,6 +1,10 @@
 package me.danvb10.sustenance.commands;
 
 import me.danvb10.sustenance.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+import java.util.Objects;
 
 public class CommandManager {
 
@@ -10,8 +14,17 @@ public class CommandManager {
 
         // Register top level commands
         // We're gonna handle most switch/case logic inside the primary command class
-        plugin.getCommand("sustenance").setExecutor(new Sus());
-        plugin.getCommand("sus").setExecutor(new Sus());
+        Objects.requireNonNull(plugin.getCommand("sustenance")).setExecutor(new Sus());
+        Objects.requireNonNull(plugin.getCommand("sus")).setExecutor(new Sus());
 
+    }
+
+    public static Player getPlayer(String name) {
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            if(player.getName().equals(name)) {
+                return player;
+            }
+        }
+        return null;
     }
 }

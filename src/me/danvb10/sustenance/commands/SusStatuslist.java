@@ -9,19 +9,19 @@ import org.bukkit.entity.Player;
 public class SusStatuslist {
     public static void goCode(CommandSender sender, Command command, String label, String[] args) {
 
-        Boolean playersAdded = false;
+        boolean playersAdded = false;
 
-        String message = "Nutrition values for current online players...\n";
+        StringBuilder message = new StringBuilder("Nutrition values for current online players...\n");
         for(Player p : Bukkit.getOnlinePlayers()) {
             playersAdded = true;
-            message += "'" + p.getName() + "': " + Main.nutritionManager.getPlayerNutrition(p).getFormattedNutrition() + "\n";
+            message.append("'").append(p.getName()).append("': ").append(Main.nutritionManager.getPlayerNutrition(p).getFormattedNutrition()).append("\n");
         }
 
         if(!playersAdded) {
-            message += "There are no players currently online!";
+            message.append("There are no players currently online!");
         }
 
-        Main.messagingManager.info(message, sender);
+        Main.messagingManager.info(message.toString(), sender);
 
     }
 }

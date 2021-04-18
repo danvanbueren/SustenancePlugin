@@ -1,18 +1,16 @@
 package me.danvb10.sustenance.commands;
 
 import me.danvb10.sustenance.Main;
-import me.danvb10.sustenance.utilities.messaging.MessageTemplates;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SusStatus {
 
-    public static void goCode(CommandSender sender, Command command, String label, String[] args) {
+    public static void goCode(CommandSender sender, String[] args) {
 
         if(args.length > 1) {
-            Boolean foundPlayer = false;
+            boolean foundPlayer = false;
             for(Player p : Bukkit.getOnlinePlayers()) {
                 if(p.getName().equalsIgnoreCase(args[1])) {
                     foundPlayer = true;

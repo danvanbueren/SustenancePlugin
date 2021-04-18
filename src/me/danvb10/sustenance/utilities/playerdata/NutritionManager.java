@@ -2,6 +2,7 @@ package me.danvb10.sustenance.utilities.playerdata;
 
 import me.danvb10.sustenance.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -61,6 +62,13 @@ public class NutritionManager {
 
     public PlayerNutrition getPlayerNutrition(Player p) {
         return nutritionHashMap.get(p.getUniqueId());
+    }
+
+    public boolean isConditionallyExempt(Player p) {
+        if(getPlayerNutrition(p).isExempt() || p.getGameMode().equals(GameMode.CREATIVE) || p.getGameMode().equals(GameMode.SPECTATOR)) {
+            return true;
+        }
+        return false;
     }
 
 }

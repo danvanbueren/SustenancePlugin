@@ -2,6 +2,7 @@ package me.danvb10.sustenance.utilities.playerdata;
 
 import me.danvb10.sustenance.Main;
 import me.danvb10.sustenance.utilities.enums.Category;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -15,6 +16,8 @@ public class PlayerNutrition implements Serializable {
     transient Player player;
     UUID playerUuid;
     int vegetables = 100, protein = 100, grain = 100, fruit = 100;
+
+    private boolean isExempt = false;
 
     @Override
     public String toString() {
@@ -141,6 +144,20 @@ public class PlayerNutrition implements Serializable {
 
     // Returns prettified nutrition info
     public String getFormattedNutrition() {
-        return "Vegetables: " + vegetables + "%, Protein: " + protein + "%, Grain: " + grain + "%, Fruit: " + fruit + "%";
+        String result = "";
+        if(isExempt) {
+            result += ChatColor.RED + "" + ChatColor.BOLD + "HARD EXEMPT! " + ChatColor.GRAY;
+        }
+        result += "Vegetables: " + vegetables + "%, Protein: " + protein + "%, Grain: " + grain + "%, Fruit: " + fruit + "%";
+        return result;
+    }
+
+    // GETTERS/SETTERS
+    public boolean isExempt() {
+        return isExempt;
+    }
+    public void setExempt(boolean exempt) {
+        Main.logger.verbose(player.getName() + " - PlayerNutrition: setExempt set to " + exempt);
+        isExempt = exempt;
     }
 }
