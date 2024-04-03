@@ -1,12 +1,12 @@
 package me.danvb10.sustenance.utilities.messaging;
 
-import me.danvb10.sustenance.Main;
+import me.danvb10.sustenance.Sustenance;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class MessagingManager {
 
-    Main plugin;
+    Sustenance plugin;
 
     static String prefix = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "[" + ChatColor.GRAY + "" + ChatColor.BOLD + "Sustenance" + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "] ";
 
@@ -14,7 +14,7 @@ public class MessagingManager {
     public static String warnPrefix = prefix + ChatColor.YELLOW + "" + ChatColor.BOLD + "WARNING: " + ChatColor.RESET;
     public static String errorPrefix = prefix + ChatColor.RED + "" + ChatColor.BOLD + "ERROR: " + ChatColor.RESET;
 
-    public MessagingManager(Main plugin) {
+    public MessagingManager(Sustenance plugin) {
         this.plugin = plugin;
     }
 

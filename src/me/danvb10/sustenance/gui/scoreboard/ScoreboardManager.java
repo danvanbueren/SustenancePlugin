@@ -1,6 +1,6 @@
 package me.danvb10.sustenance.gui.scoreboard;
 
-import me.danvb10.sustenance.Main;
+import me.danvb10.sustenance.Sustenance;
 import me.danvb10.sustenance.utilities.enums.Category;
 import me.danvb10.sustenance.utilities.playerdata.PlayerNutrition;
 import org.bukkit.Bukkit;
@@ -18,11 +18,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class ScoreboardManager {
-    Main plugin;
+    Sustenance plugin;
     HashMap<UUID, BukkitTask> boardOnIndefinitely = new HashMap<>();
     HashMap<UUID, BukkitTask> boardOnDefinitelyAllTasks = new HashMap<>();
 
-    public ScoreboardManager(Main plugin) {
+    public ScoreboardManager(Sustenance plugin) {
         this.plugin = plugin;
     }
 
@@ -32,7 +32,7 @@ public class ScoreboardManager {
             try {
                 setBoardToCurrentValues(p);
             } catch (Exception e) {
-                Main.logger.error("Runnable for showTimedBoard() encountered an error updating!\n" + Arrays.toString(e.getStackTrace()));
+                Sustenance.logger.verbose("ScoreboardManager:showBoardDefiniteTime(): " + "Runnable for showTimedBoard() encountered an error updating!\n" + Arrays.toString(e.getStackTrace()));
             }
         }, 0L, 5L);
 
@@ -43,7 +43,7 @@ public class ScoreboardManager {
                     setBoardToClear(p);
                 }
             } catch (Exception e) {
-                Main.logger.error("Runnable for showTimedBoard() encountered an error cancelling!\n" + Arrays.toString(e.getStackTrace()));
+                Sustenance.logger.verbose("ScoreboardManager:showBoardDefiniteTime(): " + "Runnable for showTimedBoard() encountered an error cancelling!\n" + Arrays.toString(e.getStackTrace()));
             }
         }, seconds * 20L);
 
@@ -57,7 +57,7 @@ public class ScoreboardManager {
             try {
                 setBoardToCurrentValues(p);
             } catch (Exception e) {
-                Main.logger.error("Runnable for showTimedBoard() encountered an error updating!\n" + Arrays.toString(e.getStackTrace()));
+                Sustenance.logger.verbose("ScoreboardManager:showBoardIndefiniteTime(): " + "Runnable for showTimedBoard() encountered an error updating!\n" + Arrays.toString(e.getStackTrace()));
             }
         }, 0L, 5L);
     }
@@ -71,9 +71,9 @@ public class ScoreboardManager {
         obj.setDisplayName("Nutrition Status");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        PlayerNutrition pn = Main.nutritionManager.getPlayerNutrition(p);
+        PlayerNutrition pn = Sustenance.nutritionManager.getPlayerNutrition(p);
 
-        if(Main.nutritionManager.isConditionallyExempt(p)) {
+        if(Sustenance.nutritionManager.isConditionallyExempt(p)) {
             Score line0 = obj.getScore(ChatColor.RED + "" + ChatColor.BOLD + "YOU ARE EXEMPT!");
             line0.setScore(5);
         }
@@ -100,10 +100,10 @@ public class ScoreboardManager {
     public void toggleBoard(Player p) {
         UUID id = p.getUniqueId();
         if(boardOnIndefinitely.containsKey(id)) {
-            Main.messagingManager.info("Hiding nutrition status", p);
+            Sustenance.messagingManager.info("Hiding nutrition status", p);
             removeBoardAndReferences(p);
         } else {
-            Main.messagingManager.info("Showing nutrition status", p);
+            Sustenance.messagingManager.info("Showing nutrition status", p);
             boardOnIndefinitely.put(id, showBoardIndefiniteTime(p));
         }
     }
@@ -120,7 +120,7 @@ public class ScoreboardManager {
             // clear board from gui
             setBoardToClear(p);
         } catch (Exception e) {
-            Main.logger.verbose(Arrays.toString(e.getStackTrace()));
+            Sustenance.logger.verbose("ScoreboardManager:removeBoardAndReferences(): " + Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -141,7 +141,7 @@ public class ScoreboardManager {
                 }
             });
         } catch (Exception e) {
-            Main.logger.verbose(Arrays.toString(e.getStackTrace()));
+            Sustenance.logger.verbose("ScoreboardManager:destroyAllBoards(): " + Arrays.toString(e.getStackTrace()));
         }
     }
 }

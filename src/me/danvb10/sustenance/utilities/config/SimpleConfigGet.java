@@ -1,16 +1,20 @@
 package me.danvb10.sustenance.utilities.config;
 
-import me.danvb10.sustenance.Main;
+import me.danvb10.sustenance.Sustenance;
 import me.danvb10.sustenance.utilities.enums.Category;
+import me.danvb10.sustenance.utilities.enums.PotionEffectTypeUtil;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class SimpleConfigGet {
 
-    Main plugin;
+    Sustenance plugin;
 
-    public SimpleConfigGet(Main plugin) {
+    public SimpleConfigGet(Sustenance plugin) {
         this.plugin = plugin;
     }
 
@@ -44,6 +48,32 @@ public class SimpleConfigGet {
             }
         }
         return returnCats;
+    }
+
+    public ArrayList<PotionEffect> getEffects(String effectCategory) {
+        try {
+
+            ConfigurationSection s2 = plugin.getConfig().getConfigurationSection("effects." + effectCategory);
+            Set<String> effects = s2.getKeys(false);
+
+            ArrayList<PotionEffect> output = new ArrayList<>();
+
+            for (String effectName : effects){
+                int amplifier = (int) plugin.getConfig().get("effects." + effectCategory + "." + effectName);
+                PotionEffectType effectType = PotionEffectTypeUtil.getTypeFromNormalName(effectName);
+
+                if (effectType != null)
+                    output.add(new PotionEffect(effectType, Integer.MAX_VALUE, amplifier));
+
+            }
+
+            return output;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public int getValueFromCategoryAndMaterial(Category passedActualCategory, Material passedActualMaterial) {

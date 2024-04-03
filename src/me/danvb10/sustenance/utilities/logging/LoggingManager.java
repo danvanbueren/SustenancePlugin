@@ -1,13 +1,13 @@
 package me.danvb10.sustenance.utilities.logging;
 
-import me.danvb10.sustenance.Main;
+import me.danvb10.sustenance.Sustenance;
 
 public class LoggingManager {
 
-    Main plugin;
+    Sustenance plugin;
     Boolean isVerbose = false;
 
-    public LoggingManager(Main plugin) {
+    public LoggingManager(Sustenance plugin) {
         this.plugin = plugin;
     }
 
@@ -37,8 +37,6 @@ public class LoggingManager {
         isVerbose = plugin.getConfig().getBoolean("settings.verbose-logging");
         if(isVerbose) {
             verbose("VERBOSE MODE IS ~ENABLED~");
-        } else {
-            log("VERBOSE MODE IS ~DISABLED~");
         }
     }
 }

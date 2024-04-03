@@ -1,6 +1,6 @@
 package me.danvb10.sustenance.commands;
 
-import me.danvb10.sustenance.Main;
+import me.danvb10.sustenance.Sustenance;
 import me.danvb10.sustenance.utilities.messaging.MessageTemplates;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -26,8 +26,8 @@ public class Sus implements CommandExecutor {
         String menuStatus;
         if(sender instanceof Player) {
             Player p = (Player) sender;
-            menuStatus = Main.nutritionManager.getPlayerNutrition(p).getFormattedNutrition();
-            if(Main.nutritionManager.isConditionallyExempt(p)) {
+            menuStatus = Sustenance.nutritionManager.getPlayerNutrition(p).getFormattedNutrition();
+            if(Sustenance.nutritionManager.isConditionallyExempt(p)) {
                 menuStatus += ChatColor.RED + "" + ChatColor.BOLD + "\nYOU ARE EXEMPT!";
             }
         } else { menuStatus = "Not available in console!"; }
@@ -62,7 +62,7 @@ public class Sus implements CommandExecutor {
                     break;
                 default:
                     // Argument exists but doesn't match cases - send menu
-                    Main.messagingManager.info("'" + args[0] + "' is not a command!", sender);
+                    Sustenance.messagingManager.info("'" + args[0] + "' is not a command!", sender);
                     sender.sendMessage(menu);
                     break;
             }

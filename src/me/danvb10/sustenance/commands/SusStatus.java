@@ -1,6 +1,6 @@
 package me.danvb10.sustenance.commands;
 
-import me.danvb10.sustenance.Main;
+import me.danvb10.sustenance.Sustenance;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -18,24 +18,24 @@ public class SusStatus {
                     if(sender instanceof Player) {
                         Player pCheck = (Player) sender;
                         if(p.getUniqueId().equals(pCheck.getUniqueId())) {
-                            Main.scoreboardManager.toggleBoard(pCheck);
+                            Sustenance.scoreboardManager.toggleBoard(pCheck);
                         } else {
-                            Main.messagingManager.info("Nutrition status for '" + p.getName() + "'...\n" + Main.nutritionManager.getPlayerNutrition(p).getFormattedNutrition(), sender);
+                            Sustenance.messagingManager.info("Nutrition status for '" + p.getName() + "'...\n" + Sustenance.nutritionManager.getPlayerNutrition(p).getFormattedNutrition(), sender);
                         }
                     } else {
-                        Main.messagingManager.info("Nutrition status for '" + p.getName() + "'...\n" + Main.nutritionManager.getPlayerNutrition(p).getFormattedNutrition(), sender);
+                        Sustenance.messagingManager.info("Nutrition status for '" + p.getName() + "'...\n" + Sustenance.nutritionManager.getPlayerNutrition(p).getFormattedNutrition(), sender);
                     }
                 }
             }
             if(!foundPlayer) {
-                Main.messagingManager.info("Could not find an online player named '" + args[1] + "'", sender);
+                Sustenance.messagingManager.info("Could not find an online player named '" + args[1] + "'", sender);
             }
         } else {
             if(sender instanceof Player) {
                 Player p = (Player) sender;
-                Main.scoreboardManager.toggleBoard(p);
+                Sustenance.scoreboardManager.toggleBoard(p);
             } else {
-                Main.messagingManager.info("Self lookup not available in console!\nUsage: sus status {PlayerName} <- SHOWS STATUS OF PLAYER\n(alt): sus statuslist <- SHOWS STATUS OF ALL ONLINE PLAYERS", sender);
+                Sustenance.messagingManager.info("Self lookup not available in console!\nUsage: sus status {PlayerName} <- SHOWS STATUS OF PLAYER\n(alt): sus statuslist <- SHOWS STATUS OF ALL ONLINE PLAYERS", sender);
             }
         }
 

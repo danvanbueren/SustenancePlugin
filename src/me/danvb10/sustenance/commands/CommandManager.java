@@ -1,6 +1,6 @@
 package me.danvb10.sustenance.commands;
 
-import me.danvb10.sustenance.Main;
+import me.danvb10.sustenance.Sustenance;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -10,12 +10,13 @@ public class CommandManager {
 
     // Load all commands
     // The only time this can be called is during onEnable();
-    public CommandManager(Main plugin) {
+    public CommandManager(Sustenance plugin) {
 
         // Register top level commands
         // We're gonna handle most switch/case logic inside the primary command class
-        Objects.requireNonNull(plugin.getCommand("sustenance")).setExecutor(new Sus());
-        Objects.requireNonNull(plugin.getCommand("sus")).setExecutor(new Sus());
+        plugin.getCommand("sustenance").setExecutor(new Sus());
+        plugin.getCommand("sus").setExecutor(new Sus());
+
 
     }
 
